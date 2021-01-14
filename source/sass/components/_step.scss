@@ -1,0 +1,60 @@
+.step {
+  @include flex-center-ver;
+  justify-content: flex-end;
+  height: 30px;
+  position: relative;
+  background: $light-grey;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 15px solid $white;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: -15px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 15px solid $light-grey;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    z-index: 999;
+  }
+
+  &:last-child {
+    &:after {
+      display: none;
+    }
+
+    .step__label {
+      margin-right: 5px;
+    }
+  }
+
+  &:first-child {
+    &:before {
+      display: none;
+    }
+
+    .step__label {
+      margin-right: 5px;
+    }
+  }
+
+  &--current {
+    background: $blue;
+
+    &:after {
+      border-left: 15px solid $blue;
+    }
+  }
+}

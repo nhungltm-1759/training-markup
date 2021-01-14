@@ -19,6 +19,10 @@
       border-color: $red;
     }
   }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .form-error {
@@ -27,6 +31,12 @@
   margin-top: 5px;
   font-size: 12px;
 }
+
+.form-notice {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 
 .checkbox {
   position: relative;
@@ -64,6 +74,47 @@
       border: 1px solid $white;
       border-width: 0 3px 3px 0;
       transform: rotate(45deg);
+    }
+  }
+
+  input:checked ~ .checkmark:after {
+    display: block;
+  }
+}
+
+.radio {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  margin-bottom: 0;
+  line-height: 18px;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    @include size(0, 0);
+    z-index: -1;
+  }
+
+  .checkmark {
+    left: 0;
+    @include size(16px, 16px);
+    border: 1px solid $black;
+    @include abs-center-ver;
+    border-radius: 50%;
+
+    &:after {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 2px;
+      content: '';
+      background: $blue;
+      display: none;
     }
   }
 

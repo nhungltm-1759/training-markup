@@ -1,0 +1,26 @@
+//-------------------------------------------------------
+//- Modules :: Steps
+//-------------------------------------------------------
+
+mixin steps({ stepTotal, currentStep, type, size })
+  - var i = 0;
+  .steps.d-flex.justify-content-between(
+    class= type ? `steps--${type}` : null
+    class= size ? `steps--${size}` : null
+  )
+    - currentStep = currentStep ? currentStep : 1
+    while i < 5
+      +step({
+        number: i + 1,
+        current: i + 1 == currentStep,
+        width: (100 - stepTotal) / stepTotal
+      })
+      - var i = i+1;
+
+mixin step({ number, current, width })
+  .step(
+    id=`step${number}-label`
+    class= current ? 'step--current' : null
+    style={ width: `${width}%` }
+  )
+    span.step__label= `Step ${number}`

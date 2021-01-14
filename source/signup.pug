@@ -1,0 +1,201 @@
+extends modules/layout/_page-other
+
+block head
+  +head('Signup')
+
+block main
+  .signup
+    h1 Page signup
+    .signup-box
+      .signup-box__logo
+      .signup-box__content
+        h2.signup-box__title Sign up
+        .signup-box__step-bar
+          +steps({ stepTotal: 5 })
+        .signup-box__form
+          #step1.signup-box__step
+            .signup-info
+              p Enter your email and press the send button (send mail confirm)
+
+              form
+                +input({
+                  label: 'Mail address',
+                  id: 'email',
+                  type: 'email',
+                  error: 'Please fill this field',
+                  required: true
+                })
+              .btn-submit
+                +buttons-link({ text: 'Submit', type: 'orange', size: 'big' })(data-show='#step2').js-step
+              .signup-box__other-service
+                +loginOtherServices()
+          #step2.signup-box__step
+            .signup-info
+              h5 Send mail confirm
+              p まだ会員登録は完了しておりませんのでご注意ください まだ会員登録は完了しておりませんのでご注意ください まだ会員登録は完了しておりませんのでご注意ください
+              form
+                .signup-info__group
+                  label.font-weight-bold.d-flex Mail address
+                  p.d-flex sample@gmail.com
+                p まだ会員登録は完了しておりませんのでご注意くださいまだ会員登録は完了しておりませんのでご注意くださいまだ会員登録は完了しておりませんのでご注意ください
+                +buttons-link({
+                  href: '/#',
+                  text: 'Next',
+                  type: 'submit'
+                })(data-show='#step3').js-step
+          #step3.signup-box__step
+            .signup-info
+              h5
+              form
+                .signup-info__group
+                  .form-group.form-group--border
+                    label.font-weight-bold.d-flex Mail address
+                    p.d-flex sample@gmail.com
+                  +input({
+                    label: 'Password',
+                    id: 'password',
+                    type: 'password',
+                    notice: '* Password must include character and number',
+                    required: true
+                  }).form-group--border
+                  .form-group.form-group--border
+                    label.font-weight-bold.required Gender
+                    .d-flex
+                      each val, i in ['Male', 'Female']
+                        +radio({
+                          label: val,
+                          id: val,
+                          name: 'gender-radio',
+                          checked: i === 0
+                        }).mr-3
+                  +multi-input-text({
+                    label: 'Birthday',
+                    inputLabels: ['Year', 'Month', 'Day'],
+                    ids: ['year', 'month', 'day'],
+                    type: 'number',
+                    error: 'Invalid',
+                    required: true
+                  }).form-group--border
+                  +multi-input-text({
+                    label: 'Zip code',
+                    inputLabels: ['-'],
+                    ids: ['zip-code1', 'zip-code2'],
+                    type: 'number',
+                    required: true
+                  }).form-group--border
+                  .form-group.form-group--border
+                    label.font-weight-bold.required Register user type
+                    .d-flex.flex-wrap
+                      -
+                        var registerUserTypes = [
+                        {
+                        name: 'Personal',
+                        id: 'personal'
+                        },
+                        {
+                        name: 'Protector',
+                        id: 'protector'
+                        },
+                        {
+                        name: 'Person of school',
+                        id: 'person-school'
+                        },
+                        {
+                        name: 'Other',
+                        id: 'other'
+                        }
+                        ]
+                      each item, i in registerUserTypes
+                        +radio({
+                          label: item.name,
+                          id: item.id,
+                          name: 'register-user-type',
+                          checked: i === 0
+                        }).mr-3.mb-2
+                    p.form-notice.d-flex * Notice of register user
+                  .form-group.form-group--border
+                    label.font-weight-bold Notification
+                    +checkbox({
+                      label: 'Receive notification via mail',
+                      id: 'notice-mail'
+                    })
+                    p.form-notice.d-flex * Notice of Notification
+                    +checkbox({
+                      label: 'Receive notification via post office',
+                      id: 'notice-post-office'
+                    })
+                .signup-info__button
+                  +buttons-link({
+                    text: 'Agree Terms and continue',
+                    type: 'blue', size: 'big'
+                  })(data-show='#step4').js-step
+
+              p.font-weight-bold.mt-3 Terms of use and privacy policy
+              .signup-info__group
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                | Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                | Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              .signup-info__button
+                +buttons-link({
+                  text: 'Back',
+                  type: 'light-grey'
+                })(data-show='#step2').js-step
+          #step4.signup-box__step
+            .signup-info
+              h5 Account info
+              form
+                .signup-info__group
+                  -
+                    var accountInfo = [
+                    {
+                    label: 'Name',
+                    text: 'sample@gmail.com'
+                    },
+                    {
+                    label: 'Password',
+                    text: 'Password',
+                    type: 'password'
+                    },
+                    {
+                    label: 'Gender',
+                    text: 'Male'
+                    },
+                    {
+                    label: 'Birthday',
+                    text: '11/1/2000'
+                    },
+                    {
+                    label: 'Zip code',
+                    text: '222-33333'
+                    },
+                    {
+                    label: 'Register user type',
+                    text: 'Personal'
+                    }
+                    ]
+                  each item in accountInfo
+                    .form-group
+                      label.font-weight-bold= item.label
+                      p.d-flex= item.type === 'password' ? '••••••••••' : item.text
+                .signup-info__button
+                  +buttons-link({
+                    text: 'Next',
+                    type: 'blue'
+                  })(data-show='#step5').js-step
+                .signup-info__button
+                  +buttons-link({
+                    text: 'Back',
+                    type: 'light-grey'
+                  })(data-show='#step3').js-step
+          #step5.signup-box__step
+            .signup-info__group
+              .d-flex.flex-column.align-items-center
+                p ありがとうございました。
+                p アカウントを作成しました。
+              .signup-info__button.d-flex.flex-column
+                +buttons-link({
+                  text: 'トップページへ',
+                  type: 'blue'
+                })(data-show='#step1').js-step
+        .signup-box__footer
+          +loginBoxFooter()

@@ -2,7 +2,7 @@
 //- Modules :: Inputs
 //-------------------------------------------------------
 
-mixin input({label, id, type, required, error})
+mixin input({label, id, type, required, error, notice})
   .form-group(
     class= required ? 'form-group--required' : null
     class= error ? 'form-group--error' : null
@@ -12,6 +12,28 @@ mixin input({label, id, type, required, error})
     type=type
     id=id
     )
+    if (notice)
+      p.form-notice.d-flex= notice
+    if (error)
+      p.form-error= error
+
+mixin multi-input-text({label, inputLabels, ids, type, required, error, notice})
+  .form-group(
+  class= error ? 'form-group--error' : null
+  )&attributes(attributes)
+    label.font-weight-bold(
+    class= required ? 'required' : null
+    for=ids[0]
+    )= label
+    .d-flex.align-items-center.multi-inputs
+      each id, index in ids
+        input.form-control(
+        type=type
+        id=id
+        )
+        span.mx-1= inputLabels[index]
+    if (notice)
+      p.form-notice.d-flex= notice
     if (error)
       p.form-error= error
 
@@ -21,5 +43,14 @@ mixin checkbox({label, checked, id, disabled, name})
       input.input-checkbox(type='checkbox', name= name, id= id, checked='checked', disabled= disabled)
     else
       input.input-checkbox(type='checkbox', name= name, id= id, disabled= disabled)
+    span.checkmark
+    span= label
+
+mixin radio({label, checked, id, disabled, name})
+  label.radio(for= id).d-flex.align-items-center&attributes(attributes)
+    if checked === true
+      input.input-radio(type='radio', name= name, id= id, checked='checked', disabled= disabled)
+    else
+      input.input-radio(type='radio', name= name, id= id, disabled= disabled)
     span.checkmark
     span= label
