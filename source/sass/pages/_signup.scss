@@ -1,0 +1,33 @@
+.signup {
+  display: block;
+  flex-shrink: 0;
+  margin: 0 auto;
+  flex-direction: column;
+  position: relative;
+
+  h1 {
+    @include flex-center-hoz;
+  }
+}
+
+.signup-box {
+  @include flex-inline-center;
+  border-radius: 8px;
+  border: 1px solid $light-grey;
+  max-width: 400px;
+  padding: 48px 40px;
+
+  &__text-link {
+    margin-top: 5px;
+    display: block;
+    @include flex-center;
+  }
+
+  &__footer {
+    width: 308px;
+  }
+
+  &__step-bar {
+    margin-bottom: 15px;
+  }
+}
